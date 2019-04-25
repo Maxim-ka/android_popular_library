@@ -1,30 +1,22 @@
 package reschikov.geekbrains.popularlibraries.rxjava.presenter;
 
-import android.os.AsyncTask;
 import android.util.Log;
+
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import reschikov.geekbrains.popularlibraries.rxjava.model.Generator;
 
 public class PresenterTask1 {
 
-    public void start(){
-       new MyAsyncTask().execute();
-       Log.i("task_1", "метод завершён");
-    }
+	private Single<Long> error = new Generator().toMessageError();
+	private Single<String> single = new Generator().toMessage();
 
-    private static class MyAsyncTask extends AsyncTask<Void, Void, Void>{
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            for (int i = 0; i < 5; i++) {
-                calculate();
-                Log.i("Message", String.format("message %d - %s", i, Thread.currentThread().getName()));
-            }
-            return null;
-        }
-
-        private void calculate() {
-            double r = 1;
-            for (int j = 0; j < 80_000_000; j++)
-                r = j * 0.01 + r / 0.01;
-        }
+	public void start(){
+        error.observeOn(AndroidSchedulers.mainThread())
+	        .subscribe(number -> Log.i("error", "message " + number),
+		        error -> Log.e("error", error.getMessage()));
+		single.observeOn(AndroidSchedulers.mainThread())
+			.subscribe(string -> Log.i("single", "message " + string),
+				error -> Log.e("single", error.getMessage()));
     }
 }
