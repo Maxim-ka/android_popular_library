@@ -10,16 +10,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import reschikov.geekbrains.popularlibraries.rxjava.R;
-import reschikov.geekbrains.popularlibraries.rxjava.presenter.PresenterTask1;
+import reschikov.geekbrains.popularlibraries.rxjava.presenter.PresenterGson;
 
-public class Task1Fragment extends Fragment {
+public class GsonFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.task_1, container, false);
         Button take = view.findViewById(R.id.button_task_1);
-        final PresenterTask1 presenter = new PresenterTask1();
+        final PresenterGson presenter = new PresenterGson();
         take.setOnClickListener(vButton -> presenter.start());
         return view;
     }

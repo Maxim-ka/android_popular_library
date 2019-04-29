@@ -1,37 +1,43 @@
 package reschikov.geekbrains.popularlibraries.rxjava.model;
+import com.google.gson.annotations.SerializedName;
 
-import java.util.LinkedList;
-import java.util.Observable;
-import java.util.Observer;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 
-public class Data extends Observable {
+public class Data {
 
-	private final LinkedList<Observer> observerList = new LinkedList<>();
-
-	public LinkedList<Observer> getObserverList() {
-		return observerList;
+	interface Derivable {
+		@GET("/users/{user}")
+		Single<Avatar> getUrlImage(@Path("user") String user);
 	}
 
-	@Override
-	public synchronized int countObservers() {
-		return observerList.size();
-	}
+	public class Avatar{
+		@SerializedName("avatar_url")
+		private String url;
 
-	@Override
-	public synchronized void addObserver(Observer o) {
-		observerList.add(o);
-	}
-
-	@Override
-	public synchronized void deleteObserver(Observer o) {
-		observerList.remove(o);
-	}
-
-	@Override
-	public void notifyObservers(Object arg) {
-		if (observerList.isEmpty()) return;
-		for (int i = 0; i < observerList.size(); i++) {
-			observerList.get(i).update(this, "message " + arg);
+		public String getUrl() {
+			return url;
 		}
+	}
+
+	private Derivable derivable;
+
+	public Data() {
+		derivable = new Retrofit.Builder()
+			.baseUrl("https://api.github.com")
+			.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+			.addConverterFactory(GsonConverterFactory.create())
+			.build()
+		    .create(Derivable.class);
+	}
+
+	public Single<Avatar> toRequest(){
+		return (derivable.getUrlImage("JakeWharton")).subscribeOn(Schedulers.io());
 	}
 }
