@@ -9,13 +9,20 @@ import reschikov.geekbrains.popularlibraries.rxjava.model.Data;
 
 public class PresenterRetorfit {
 
-	private String response;
+	public interface  Loadable{
+		void download(String url);
+	}
 
-	public String toRequest(){
+	private Loadable loadable;
+
+	public PresenterRetorfit(Loadable loadable) {
+		this.loadable = loadable;
+	}
+
+	public void toRequest(){
 		Single<Data.Avatar> request = new Data().toRequest();
 		Disposable disposable = request.observeOn(AndroidSchedulers.mainThread())
-			.subscribe(avatar -> response = avatar.getUrl(),
+			.subscribe(avatar -> loadable.download(avatar.getUrl()),
 			e -> Log.e("ServerError", e.getMessage()));
-		return response;
 	}
 }
