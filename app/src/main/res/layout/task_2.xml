@@ -3,30 +3,24 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     >
 
-    <Button
-        android:id="@+id/button_subscription"
+    <ImageView
+        android:id="@+id/image_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Подписаться"
-        android:textSize="26sp"/>
-
-    <Button
-        android:id="@+id/button_unsubscribe"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Отписаться"
-        android:textSize="26sp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="center"
+        android:contentDescription="avatar" />
 
     <Button
-        android:id="@+id/button_spam"
+        android:id="@+id/button_get"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Спам"
-        android:textSize="26sp"/>
+        android:text="Получить"
+        android:textSize="26sp"
+        android:layout_gravity="bottom"/>
 
 </LinearLayout>
