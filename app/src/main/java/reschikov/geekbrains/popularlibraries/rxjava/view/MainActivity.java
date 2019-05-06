@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        if (savedInstanceState == null) loadFragment(new GsonFragment(), "Gson");
+        if (savedInstanceState == null) loadFragment(new RoomFragment(), "Room");
     }
 
     private void loadFragment(Fragment newFragment, String tag){
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 loadFragment(new RetorfitFragment(), "Task2");
                 return true;
             case R.id.navigation_notifications:
-                loadFragment(new Task3Fragment(), "Task3");
+                loadFragment(new RoomFragment(), "Room");
                 return true;
         }
         return false;
