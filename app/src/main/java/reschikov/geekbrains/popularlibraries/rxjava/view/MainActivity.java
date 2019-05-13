@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        if (savedInstanceState == null) loadFragment(new RoomFragment(), "Room");
+        if (savedInstanceState == null) loadFragment(new NoDiAndDiFragment(), "Task_1_2");
     }
 
     private void loadFragment(Fragment newFragment, String tag){
@@ -28,13 +28,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
-                loadFragment(new GsonFragment(), "Gson");
+                loadFragment(new NoDiAndDiFragment(), "Task_1_2");
                 return true;
             case R.id.navigation_dashboard:
-                loadFragment(new RetorfitFragment(), "Task2");
+                loadFragment(new DaggerFragment(), "Task3");
                 return true;
             case R.id.navigation_notifications:
-                loadFragment(new RoomFragment(), "Room");
+//                loadFragment(new RoomFragment(), "Room");
                 return true;
         }
         return false;
