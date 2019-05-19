@@ -7,6 +7,10 @@ public class Green {
 	void show(Object object){
 		Log.i(object.getClass().getSimpleName() + " -> show: ", getClass().getSimpleName() + hashCode());
 	}
+
+	public int add(int x, int y){
+		return x + y;
+	}
 }
 
 

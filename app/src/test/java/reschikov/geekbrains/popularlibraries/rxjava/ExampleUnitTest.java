@@ -1,17 +1,43 @@
 package reschikov.geekbrains.popularlibraries.rxjava;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.util.Random;
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
+import reschikov.geekbrains.popularlibraries.rxjava.model.Green;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
 public class ExampleUnitTest {
-    @Test
+
+	private static final int BOUND = 20;
+	private Green green;
+	private final Random random = new Random();
+	private int x;
+	private int y;
+	private int correctResult;
+	private int inCorrectResult;
+
+	@Before
+	public void init(){
+		green = new Green();
+		x = random.nextInt(BOUND);
+		y = random.nextInt(BOUND);
+		correctResult = x + y;
+		do{
+			inCorrectResult = random.nextInt(BOUND);
+		}while (inCorrectResult == correctResult);
+	}
+
+	@Test
     public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+        assertEquals(String.format("test not passed %d != %d + %d", correctResult, x, y), correctResult, green.add(x, y));
     }
+
+	@Test
+	public void addition_isIncorrect() {
+		assertNotEquals(String.format("test not passed %d = %d + %d", inCorrectResult, x, y), inCorrectResult, green.add(x, y));
+	}
 }
