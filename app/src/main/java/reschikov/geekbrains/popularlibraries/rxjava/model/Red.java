@@ -10,7 +10,7 @@ public class Red {
 	Green green;
 
 	public Red() {
-		AppDagger.getGreenComponent().inject(this);
+		AppDagger.getInstance().getGreenComponent().inject(this);
 		green.show(this);
 	}
 }

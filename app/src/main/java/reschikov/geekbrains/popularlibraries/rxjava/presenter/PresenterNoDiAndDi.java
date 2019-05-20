@@ -5,6 +5,7 @@ import reschikov.geekbrains.popularlibraries.rxjava.model.RedDi;
 import reschikov.geekbrains.popularlibraries.rxjava.model.RedNoDi;
 import reschikov.geekbrains.popularlibraries.rxjava.model.WhiteDi;
 import reschikov.geekbrains.popularlibraries.rxjava.model.WhiteNoDi;
+import reschikov.geekbrains.popularlibraries.rxjava.model.dagger.AppDagger;
 
 public class PresenterNoDiAndDi {
 
@@ -14,5 +15,6 @@ public class PresenterNoDiAndDi {
 	    Green green = new Green();
 	    new RedDi(green);
 	    new WhiteDi(green);
+	    AppDagger.getInstance().getWatcher().watch(green, "Green");
     }
 }
